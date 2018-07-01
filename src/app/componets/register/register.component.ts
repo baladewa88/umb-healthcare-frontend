@@ -10,13 +10,10 @@ import {Router} from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
+  name: String;
   username: String;
   email: String;
   password: String;
-  frontName: String;
-  middleName: String;
-  lastName: String;
-  phoneNumber: String;
 
   constructor(private validateService: ValidateService ,
               private flashMessage:FlashMessagesService,
@@ -29,13 +26,10 @@ export class RegisterComponent implements OnInit {
   onRegisterSubmit (){
     //console.log(this.name);
     const  user = {
-      frontName: this.frontName,
-      middleName: this.middleName,
-      lastName: this.lastName,
       email: this.email,
       username: this.username,
       password: this.password,
-      phoneNumber: this.phoneNumber
+      name: this.name
     }
 
     // Required Fields
@@ -54,7 +48,8 @@ export class RegisterComponent implements OnInit {
 
     // Register User
     this.authService.registerUser(user).subscribe(data =>{
-        if(data.username != null){
+        console.log("Indikator "+data.success);
+        if(data.success == true){
           this.flashMessage.show('Conratulations, now you are registered as '+data.username+' and please go to log in', {cssClass: 'alert-success', timeout:5000});
           //console.log("Berhasil Input data");
           this.router.navigate(['/login']);

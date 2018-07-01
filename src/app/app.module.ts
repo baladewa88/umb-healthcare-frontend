@@ -17,7 +17,7 @@ import {AuthService} from './services/auth.service';
 import {FlashMessagesModule} from 'angular2-flash-messages';
 import {AuthGuard} from './guards/auth.guard';
 import { FooterComponent } from './componets/footer/footer.component';
-import { ClinicComponent } from './componets/clinic/clinic.component';
+import { SensorComponent } from './componets/sensor/sensor.component';
 
 const appRoutes: Routes = [
   {path:'', component: HomeComponent},
@@ -25,8 +25,8 @@ const appRoutes: Routes = [
   {path:'login', component: LoginComponent},
   {path:'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
   {path:'profile', component: ProfileComponent, canActivate:[AuthGuard]},
-  {path:'clinic', component: ClinicComponent, canActivate:[AuthGuard]}
-]
+  {path:'sensor', component: SensorComponent, canActivate:[AuthGuard]}
+];
 
 @NgModule({
   declarations: [
@@ -38,7 +38,7 @@ const appRoutes: Routes = [
     DashboardComponent,
     ProfileComponent,
     FooterComponent,
-    ClinicComponent
+    SensorComponent
   ],
   imports: [
     BrowserModule,

@@ -16,10 +16,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
 
     this.authService.getProfile().subscribe(profile =>{
-      let time = new Date(profile.dateBirth);
-      profile.dateBirth = formatDate(time);
       this.user = profile;
-      //console.log(profile);
     }, err => {
       console.log(err);
       return false;
