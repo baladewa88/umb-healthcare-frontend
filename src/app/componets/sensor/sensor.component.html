@@ -1,0 +1,11 @@
+<div *ngIf="sensor">
+
+  <table border = "1">
+
+      <tr> <td>Suhu Bat 1 </td> <td>Date </td></tr>
+
+      <tr *ngFor = "let d of sensor;"><td>{{d.suhubat1}}</td><td>{{d.date}}</td> </tr>
+
+  </table>
+
+</div>
