@@ -19,13 +19,22 @@ import {AuthGuard} from './guards/auth.guard';
 import { FooterComponent } from './componets/footer/footer.component';
 import { SensorComponent } from './componets/sensor/sensor.component';
 
+
+import {ProfileService} from './services/profile.service';
+import {DatatransferService} from './services/datatransfer.service';
+import {ConstantvariablesService} from './services/constantvariables.service';
+
+import { EditProfileComponent } from './componets/edit-profile/edit-profile.component';
+import { EditPasswordComponent } from './componets/edit-password/edit-password.component';
+
 const appRoutes: Routes = [
   {path:'', component: HomeComponent},
   {path:'register', component: RegisterComponent},
   {path:'login', component: LoginComponent},
   {path:'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
   {path:'profile', component: ProfileComponent, canActivate:[AuthGuard]},
-  {path:'sensor', component: SensorComponent, canActivate:[AuthGuard]}
+  {path:'profileEdit', component: EditProfileComponent, canActivate:[AuthGuard]},
+  {path:'passwordEdit', component: EditPasswordComponent, canActivate:[AuthGuard]}
 ];
 
 @NgModule({
@@ -38,7 +47,9 @@ const appRoutes: Routes = [
     DashboardComponent,
     ProfileComponent,
     FooterComponent,
-    SensorComponent
+    SensorComponent,
+    EditProfileComponent,
+    EditPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +58,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     FlashMessagesModule
   ],
-  providers: [ValidateService, AuthService, AuthGuard],
+  providers: [ValidateService, AuthService, AuthGuard, ProfileService, DatatransferService, ConstantvariablesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

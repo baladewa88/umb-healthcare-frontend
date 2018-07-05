@@ -32,18 +32,25 @@ export class LoginComponent implements OnInit {
       role: this.role
     }
 
-    this.authService.authenticateUserTimedic(user).subscribe(data =>  {
-      //console.log(data);
-      this.authService.storeUserData(data.token, data.user);
-      this.flashMessage.show('Login Successful', {cssClass: 'alert-success', timeout: 5000});
-      this.router.navigate(['/dashboard']);
-    }, error => {
-      //console.log(error.status);
-      if(error.status=="401"){
-        this.flashMessage.show('Login Failed / Incorrect Email or Password', {cssClass: 'alert-danger', timeout: 5000});
-        this.router.navigate(['/login']);
-      }
-    });
+    if(user.role != null || user.email != null || user.password != null){
+      this.authService.authenticateUserTimedic(user).subscribe(data =>  {
+        //console.log(data);
+        this.authService.storeUserData(data.token, data.user);
+        this.flashMessage.show('Login Successful', {cssClass: 'alert-success', timeout: 3000});
+        this.router.navigate(['/dashboard']);
+      }, error => {
+        //console.log(error.status);
+        if(error.status=="401"){
+          this.flashMessage.show('Login Failed / Incorrect Email or Password', {cssClass: 'alert-danger', timeout: 3000});
+          this.router.navigate(['/login']);
+        }
+      });
+    }
+    else {
+      this.flashMessage.show('Please Fill all the field', {cssClass: 'alert-danger', timeout: 3000});
+      this.router.navigate(['/login']);
+    }
+
 
   }
 }

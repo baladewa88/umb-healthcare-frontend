@@ -10,10 +10,10 @@ import {Router} from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-  name: String;
-  username: String;
+  fullName: String;
   email: String;
   password: String;
+  role: String;
 
   constructor(private validateService: ValidateService ,
               private flashMessage:FlashMessagesService,
@@ -25,44 +25,47 @@ export class RegisterComponent implements OnInit {
 
   onRegisterSubmit (){
     //console.log(this.name);
+    //const role = this.role;
+
     const  user = {
       email: this.email,
-      username: this.username,
       password: this.password,
-      name: this.name
+      fullName: this.fullName,
+      role:  this.role
     }
 
-    // Required Fields
-    /*
-    if(!this.validateService.validateRegister(user)){
-        this.flashMessage.show('Please fill in all fields',{cssClass:'alert-danger', timeout:5000});
-        return false;
-    }
-    */
+    if(user.role != null && user.email != null && user.password != null && user.fullName != null) {
 
-    // Validate Email
-    if(!this.validateService.validateEmail(user.email)){
+      // Validate Email
+      if(!this.validateService.validateEmail(user.email)){
         this.flashMessage.show('Please Use valid email', {cssClass: 'alert-danger', timeout: 5000});
         return false;
-    }
+      }
 
-    // Register User
-    this.authService.registerUser(user).subscribe(data =>{
-        console.log("Indikator "+data.success);
-        if(data.success == true){
-          this.flashMessage.show('Conratulations, now you are registered as '+data.username+' and please go to log in', {cssClass: 'alert-success', timeout:5000});
+      // Register User
+      this.authService.registerUser(user).subscribe(data => {
+        if (data.email != null) {
+          this.flashMessage.show('Conratulations, now you are registered as ' + data.email + ' and please go to log in', {
+            cssClass: 'alert-success',
+            timeout: 5000
+          });
           //console.log("Berhasil Input data");
           this.router.navigate(['/login']);
-        }else {
-          this.flashMessage.show('Failed Register', {cssClass: 'alert-danger', timeout:5000});
+        } else {
+          this.flashMessage.show('Failed Register', {cssClass: 'alert-danger', timeout: 3000});
           this.router.navigate(['/register']);
           //console.log("Gagal Input data");
         }
       }, error => {
-          console.log(error);
-          this.flashMessage.show('Unknown Error', {cssClass: 'alert-danger', timeout:5000});
-          this.router.navigate(['/register']);
+        console.log(error);
+        this.flashMessage.show('Unknown Error', {cssClass: 'alert-danger', timeout: 3000});
+        this.router.navigate(['/register']);
       });
+    }
+    else{
+      this.flashMessage.show('Please Fill all the field', {cssClass: 'alert-danger', timeout: 3000});
+      this.router.navigate(['/register']);
+    }
 
   }
 

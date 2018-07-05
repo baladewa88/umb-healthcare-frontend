@@ -1,21 +1,44 @@
 <div *ngIf="user">
 
-  <h2 class="page-header"> Your Account </h2>
+  <h2 class="page-header"> Your Profile </h2>
 
   <div class="row">
     <div class="col-md-4">
       <ul class="list-group">
-          <li class="list-group-item">Username</li>
-          <li class="list-group-item">Email</li>
-          <li class="list-group-item">Name</li>
+        <li class="list-group-item">Email</li>
+        <li class="list-group-item">Name</li>
+        <li class="list-group-item">Address</li>
+        <li class="list-group-item">Place of Birth</li>
+        <li class="list-group-item">Date of Birth</li>
+        <li class="list-group-item">Phone Number</li>
+        <li class="list-group-item">User Code</li>
+        <li class="list-group-item">Gender</li>
+        <li class="list-group-item">Religion</li>
+        <li class="list-group-item">Status</li>
+        <li class="list-group-item">Registration Date</li>
+        <li class="list-group-item">Role</li>
       </ul>
     </div>
-    <div class="col-md-4">
-          <li class="list-group-item">{{user.username}}</li>
-          <li class="list-group-item">{{user.email}} </li>
-          <li class="list-group-item">{{user.name}}</li>
+    <div class="col-md-8">
+      <li class="list-group-item">{{user.email}} </li>
+      <li class="list-group-item">{{user.fullName}}</li>
+      <li class="list-group-item">{{user.address}}</li>
+      <li class="list-group-item">{{user.placeBirth}}</li>
+      <li class="list-group-item">{{user.dateBirth}} *Year-Month-Date</li>
+      <li class="list-group-item">{{user.phoneNumber}}</li>
+      <li class="list-group-item">{{user.adminCode}}</li>
+      <li class="list-group-item">{{user.gender}}</li>
+      <li class="list-group-item">{{user.religion}}</li>
+      <li class="list-group-item">{{user.status.status}}</li>
+      <li class="list-group-item">{{user.firstRegistrationDate}} *Year-Month-Date</li>
+      <li class="list-group-item">{{user.roles}}</li>
     </div>
   </div>
+
+  <br>
+
+  <div> <input type="submit" class="btn btn-primary" value="Change Data" (click)="gotoEditProfile(user)">
+    <input type="submit" class="btn btn-primary" value="Change Password" (click)="gotoEditPassword(user)"></div>
 
   <br>
 
